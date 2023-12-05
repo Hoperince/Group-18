@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #495057;
+        }
+
+        header {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        nav {
+            background-color: #343a40;
+            padding: 10px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #343a40;
+        }
+
+        .dashboard-cards {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .dashboard-card {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-right: 10px;
+        }
+
+        .dashboard-chart {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Trang Dashboard</h1>
+    </header>
+
+    <nav>
+        <a href="dashboard.htm">Dashboard</a>
+        <a href="nguoidung.htm">Người Dùng</a>
+        <a href="sanpham.htm">Sản Phẩm</a>
+        <a href="thongke.htm">Thống Kê</a>
+        <a href="caidat.htm">Cài Đặt</a>
+    </nav>
+
+    <section id="dashboard">
+        <h2>Tổng Quan</h2>
+
+        <div class="dashboard-cards">
+            <div class="dashboard-card">
+                <h3>Người Dùng</h3>
+                <p>Số lượng: 500</p>
+            </div>
+            <div class="dashboard-card">
+                <h3>Sản Phẩm</h3>
+                <p>Số lượng: 200</p>
+            </div>
+            <div class="dashboard-card">
+                <h3>Doanh Thu</h3>
+                <p>$50,000</p>
+            </div>
+        </div>
+
+        <div class="dashboard-chart">
+            <h3>Biểu Đồ Doanh Số Bán Hàng</h3>
+            <canvas id="salesChart"></canvas>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Dữ liệu mẫu cho biểu đồ
+        var salesData = {
+            labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
+            datasets: [{
+                label: "Doanh Số Bán Hàng",
+                data: [10000, 15000, 12000, 18000, 20000, 25000],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        // Thiết lập biểu đồ
+        var ctx = document.getElementById('salesChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: salesData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+       
