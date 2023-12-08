@@ -482,7 +482,7 @@
     <script>
 		function goToGoogle()
 		{
-			if(confirm('Login successfully'));
+			alert("Login successfully");
 		}
 	</script>
     <!-- customer login start -->
@@ -516,7 +516,10 @@
                      </div>    
                 </div>
                 <!--login area start-->
-
+function goToGG()
+		{
+			alert("Register successfully");
+		}
                 <!--register area start-->
                 <div class="col-lg-6 col-md-6">
                     <div class="account_form register">
@@ -535,7 +538,7 @@
                                 <input type="password">
                              </p>
                             <div class="login_submit">
-                                <button type="submit">Register</button>
+                               <button type="submit" value = 'Go to GG' onclick = 'goToGG();'">Register</button>
                             </div>
                         </form>
                     </div>    
