@@ -239,14 +239,21 @@
                 <div class="row align-items-center">
 				 <div class="col-lg-7 col-md-12">                     
                     </div>
+                    <script>
+		function goToO()
+		{
+			if (confirm(" Are you sure?"));
+		}
+		    </script>
+					
                     <div class="col-lg-5 col-md-12">
                         <div class="top_right text-right">
                             <ul>
                                <li class="top_links"><a href="#">My Account <i class="ion-chevron-down"></i></a>
-                                    <ul class="dropdown_links">  
-                                        <li><a href="wishlist.html">Information</a></li>									
+                                    <ul class="dropdown_links">    
+                                        <li><a href="account.html">Information</a></li>									
                                         <li><a href="login.html">Sign In</a></li>
-										<li><a href="login.html">Sign out</a></li>
+					<li><a href="login.html" value = 'Go to O' onclick = 'goToO();'>Sign out</a></li>
                                     </ul>
                                 </li> 
                                 <li class="language"><a href="#"><img src="assets/img/logo/language.png" alt=""> English <i class="ion-chevron-down"></i></a>
