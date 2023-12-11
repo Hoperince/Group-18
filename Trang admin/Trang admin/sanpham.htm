@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Quản Lý Sản Phẩm</title>
+    <title></title>
     <style>
-        body {
+         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
@@ -24,6 +24,7 @@
         nav {
             background-color: #343a40;
             padding: 10px;
+            display: flex;
         }
 
         nav a {
@@ -38,7 +39,6 @@
         nav a:hover {
             background-color: #555;
         }
-
         section {
             max-width: 800px;
             margin: 20px auto;
@@ -48,7 +48,6 @@
             border-radius: 10px;
         }
 
-        h1,
         h2,
         h3 {
             color: #343a40;
@@ -106,6 +105,26 @@
             background-color: #555;
         }
 
+        .product-actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-actions button {
+            background-color: #dc3545;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .product-actions button:hover {
+            background-color: #c82333;
+        }
+
         footer {
             background-color: #343a40;
             color: #fff;
@@ -119,67 +138,100 @@
 </head>
 
 <body>
-    <header>
-        <h1>Trang Quản Lý Sản Phẩm</h1>
-    </header>
 
     <nav>
-        <a href="dashboard.htm">Dashboard</a>
-        <a href="nguoidung.htm">Người Dùng</a>
-        <a href="sanpham.htm">Sản Phẩm</a>
-        <a href="thongke.htm">Thống Kê</a>
-        <a href="caidat.htm">Cài Đặt</a>
+        <a href="Nguoidung.htm">Người Dùng</a>
+        <a href="SanPham.htm">Sản Phẩm</a>
+        <a href="ThongKe.htm">Thống Kê</a>
+        <a href="Donhang.htm">Đơn Hàng</a>
+
     </nav>
 
     <section id="products">
         <h2>Quản Lý Sản Phẩm</h2>
 
+        <!-- Hiển thị danh sách sản phẩm -->
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Tên Sản Phẩm</th>
                     <th>Giá</th>
-                    <th>Loại</th>
+                    <th>Hình Ảnh</th>
+                    <th>Hành Động</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td>Sản Phẩm A</td>
-                    <td>$50.00</td>
-                    <td>Điện Thoại</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Sản Phẩm B</td>
-                    <td>$30.00</td>
-                    <td>Laptop</td>
+                    <td>Áo Polo</td>
+                    <td>$20.00</td>
+                    <td><img src="polo.jpg" alt="Áo Polo"></td>
+                    <td>
+                        <button onclick="editProduct(1)">Sửa</button>
+                        <button onclick="confirmDelete(1)">Xóa</button>
+                    </td>
                 </tr>
                 <!-- Thêm các dòng dữ liệu khác nếu cần -->
             </tbody>
         </table>
 
-        <h3>Thêm Mới Sản Phẩm</h3>
-        <form>
+        <!-- Form thêm, sửa sản phẩm -->
+        <form id="productForm">
+            <h3 id="formTitle">Thêm Sản Phẩm</h3>
             <label for="productName">Tên Sản Phẩm:</label>
             <input type="text" id="productName" name="productName" required>
 
             <label for="productPrice">Giá:</label>
             <input type="number" id="productPrice" name="productPrice" required>
 
-            <label for="productType">Loại:</label>
-            <select id="productType" name="productType">
-                <option value="phone">Điện Thoại</option>
-                <option value="laptop">Laptop</option>
-                <!-- Thêm các loại khác nếu cần -->
-            </select>
+            <label for="productImage">Hình Ảnh:</label>
+            <input type="file" id="productImage" name="productImage" accept="image/*">
 
-            <button type="submit">Thêm Sản Phẩm</button>
+            <button type="submit" id="submitButton">Lưu</button>
+            <button type="button" id="cancelButton" onclick="cancelAction()">Hủy</button>
         </form>
+
+        <!-- Hành động sản phẩm -->
+        <div class="product-actions">
+            <button onclick="addProduct()">Thêm Sản Phẩm</button>
+        </div>
     </section>
+<script>
+    function addProduct() {
+        document.getElementById("formTitle").innerText = "Thêm Sản Phẩm";
+        document.getElementById("submitButton").innerText = "Thêm";
+        document.getElementById("cancelButton").style.display = "inline-block";
+        document.getElementById("productForm").reset();
+    }
 
+    function editProduct(productId) {
+        document.getElementById("formTitle").innerText = "Sửa Sản Phẩm";
+        document.getElementById("submitButton").innerText = "Cập Nhật";
+        document.getElementById("cancelButton").style.display = "none";
 
-</body>
+        // Lấy thông tin sản phẩm từ cơ sở dữ liệu hoặc API và điền vào form để sửa
+        // Ví dụ: var product = getProductById(productId);
+        // document.getElementById("productName").value = product.name;
+        // document.getElementById("productPrice").value = product.price;
+        // ...
 
-</html>
+        // Trong ví dụ này, chỉ reset form để minh họa
+        document.getElementById("productForm").reset();
+    }
+
+    function confirmDelete(productId) {
+        var confirmDelete = confirm("Bạn có chắc muốn xóa sản phẩm này?");
+        if (confirmDelete) {
+            // Xử lý chức năng xóa sản phẩm
+            alert("Xóa sản phẩm có ID: " + productId);
+        }
+    }
+
+    function cancelAction() {
+        document.getElementById("formTitle").innerText = "Thêm Sản Phẩm";
+        document.getElementById("submitButton").innerText = "Lưu";
+        document.getElementById("cancelButton").style.display = "none";
+        document.getElementById("productForm").reset();
+    }
+</script>
